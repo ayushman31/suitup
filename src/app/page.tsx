@@ -1,12 +1,10 @@
 import BackgroundVideo from "@/components/BackgroundVideo";
-import { Italiana , Italianno } from 'next/font/google';
+import BlurText from "@/components/BlurText";
+import { TextEffect } from "@/components/text-effect";
+import { Italianno } from 'next/font/google';
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 
 
-const italiana = Italiana({
-  weight: ['400'],
-  subsets: ['latin'],
-})
 
 const italianno = Italianno({
   weight: ['400'],
@@ -25,13 +23,18 @@ export default function Home() {
         </div>
         
         <div className="absolute w-full h-full flex flex-col items-center justify-center">
-         <h1 className={`${italiana.className} text-white text-[175px] font-bold opacity-80`}>
-            SUITS ARE COOL
-          </h1>
+        <BlurText
+          text="SUITS ARE COOL"
+          delay={150}
+          animateBy="words"
+          direction="top"
+          className="text-[175px]"
+        />
+        
           <div className="flex flex-col items-center justify-center">
-          <h2 className={`${italianno.className} text-white text-[120px] font-bold`}>
+          <TextEffect preset='fade-in-blur' delay={1.2} speedReveal={1.1} speedSegment={0.3} className={`${italianno.className} text-white text-[120px] font-bold`}>
             So are You...
-          </h2>
+          </TextEffect>
           </div>
           </div>
     </div>
