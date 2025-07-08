@@ -1,6 +1,12 @@
 'use client'
 import { scroll } from 'motion'
 import { useEffect, useRef } from 'react'
+import { Italiana } from 'next/font/google';
+
+const italiana = Italiana({
+  weight: ['400'],
+  subsets: ['latin'],
+})
 
 interface CircleData {
   text?: string
@@ -13,9 +19,9 @@ interface AnimatedCirclesProps {
 
 export default function AnimatedCircles({ 
   circleData = [
-    { text: "TEXT AREA 1" },
-    { text: "TEXT AREA 2" },
-    { text: "TEXT AREA 3" }
+    { text: "Suits" },
+    { text: "Polos" },
+    { text: "Shirts" }
   ]
 }: AnimatedCirclesProps) {
   const circleRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -71,7 +77,7 @@ export default function AnimatedCircles({
                   circleRefs.current[i] = el
                 }
               }}
-              className="absolute left-1/2 top-1/2 w-48 h-48 border-2 border-dotted border-white rounded-full flex items-center justify-center"
+              className="absolute left-1/2 top-1/2 w-52 h-52 border-2 border-dotted border-white rounded-full flex items-center justify-center"
             >
               <div className="circle-content transition-opacity duration-500">
                 {circleData[i]?.image ? (
@@ -81,7 +87,7 @@ export default function AnimatedCircles({
                     className="w-32 h-32 object-cover rounded-full"
                   />
                 ) : (
-                  <span className="text-white text-center font-medium px-4">
+                  <span className={`${italiana.className} text-white text-center font-medium px-4 text-5xl`}>
                     {circleData[i]?.text || ''}
                   </span>
                 )}
