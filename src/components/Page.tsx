@@ -1,12 +1,32 @@
 import { useRef } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
+import { Italiana } from 'next/font/google';
+import { Italianno } from 'next/font/google';
+
+const italiana = Italiana({
+  weight: ['400'],
+  subsets: ['latin'],
+});
+
+const italianno = Italianno({
+  weight: ['400'],
+  subsets: ['latin'],
+});
 
 interface PageProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   direction: "bottom" | "left" | "right";
   pageIndex: number;
   totalPages: number;
   className?: string;
+  
+  image?: string;
+  imageAlt?: string;
+  heading?: string;
+  tagline?: string;
+  buttonText?: string;
+  onButtonClick?: () => void;
+  imagePosition?: 'left' | 'right';
 }
 
 export default function Page({ 
@@ -14,7 +34,15 @@ export default function Page({
   direction, 
   pageIndex, 
   totalPages, 
-  className = "" 
+  className = "",
+
+  image,
+  imageAlt = "",
+  heading,
+  tagline,
+  buttonText,
+  onButtonClick,
+  imagePosition = 'left'
 }: PageProps) {
   const pageRef = useRef<HTMLDivElement>(null);
   
@@ -23,7 +51,7 @@ export default function Page({
     offset: ["start end", "end start"]
   });
 
-  // Animation for the current page coming in
+  // animation for the current page coming in
   const getInitialTransform = () => {
     switch (direction) {
       case "bottom":
@@ -37,7 +65,7 @@ export default function Page({
     }
   };
 
-  // Transform for page entry animation
+  // transform for page entry animation
   const y = useTransform(
     scrollYProgress, 
     [0.1, 0.5], 
@@ -51,27 +79,114 @@ export default function Page({
     direction === "right" ? ["100%", "0%"] : ["0%", "0%"]
   );
 
-  // Scale and blur for when this page becomes "previous" (triggered when scrolling continues)
   const scale = useTransform(
     scrollYProgress,
     [0.5, 1],
-    [1, 0.9] // Zoom out when next page comes in
+    [1, 0.9] // zoom out when next page comes in
   );
 
   const blur = useTransform(
     scrollYProgress,
     [0.5, 1],
-    [0, 3] // Blur when next page comes in
+    [0, 3] // blur when next page comes in
   );
 
   const opacity = useTransform(
     scrollYProgress,
     [0, 0.1, 0.5, 1],
-    [0, 0, 1, 1] // Stay invisible until animation starts
+    [1, 1, 1, 0] // Stay invisible until animation starts
   );
 
-  // Z-index - higher pageIndex should be on top
+  // z-index - higher pageIndex should be on top
   const zIndex = pageIndex + 10;
+
+  // dividing the page into two columns and rendering the content
+  const renderTwoColumnContent = () => {
+    if (!image || !heading) return children;
+
+    const imageSection = (
+      <motion.div 
+        className="w-full h-full relative overflow-hidden flex items-center justify-center"
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <img 
+          src={image} 
+          alt={imageAlt}
+          className="w-3/4 h-3/4 object-cover"
+        />
+        <div className="absolute inset-0 bg-black/20" />
+      </motion.div>
+    );
+
+    const contentSection = (
+      <motion.div 
+        className="flex flex-col justify-center h-full p-12 lg:p-16"
+        initial={{ opacity: 0, x: imagePosition === 'left' ? 50 : -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+      >
+        <motion.h1 
+          className={`${italiana.className} text-white text-5xl lg:text-7xl font-bold mb-6 leading-tight`}
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          {heading}
+        </motion.h1>
+        
+        {tagline && (
+          <motion.p 
+            className="text-white/90 text-lg lg:text-xl leading-relaxed mb-8 max-w-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            {tagline}
+          </motion.p>
+        )}
+        
+        {buttonText && (
+          <motion.button
+            onClick={onButtonClick}
+            className={`${italiana.className} self-start px-8 py-4 bg-transparent border-2 border-white text-white font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-wider`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            {buttonText}
+          </motion.button>
+        )}
+      </motion.div>
+    );
+
+    return (
+      <div className="h-full w-full flex">
+        {imagePosition === 'left' ? (
+          <>
+            <div className="w-1/2 h-full">
+              {imageSection}
+            </div>
+            <div className="w-1/2 h-full bg-black">
+              {contentSection}
+            </div>
+          </>
+        ) : (
+          <>
+            <div className="w-1/2 h-full bg-black">
+              {contentSection}
+            </div>
+            <div className="w-1/2 h-full">
+              {imageSection}
+            </div>
+          </>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div ref={pageRef} className="h-screen w-full relative overflow-hidden">
@@ -87,7 +202,7 @@ export default function Page({
         }}
         initial={getInitialTransform()}
       >
-        {children}
+        {renderTwoColumnContent()}
       </motion.div>
     </div>
   );

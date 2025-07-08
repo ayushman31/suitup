@@ -9,14 +9,10 @@ import Page from "@/components/Page";
 import { useRef } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
 
-
-
-
 const italianno = Italianno({
   weight: ['400'],
   subsets: ['latin'],
 })
-
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -31,18 +27,18 @@ export default function Home() {
 
       return (
       <div ref={containerRef} className="relative">
-        {/* Sticky menu icon */}
+        {/* menu icon */}
       <div className="fixed top-0 left-0 z-50 flex items-center justify-between p-10">
         <HiOutlineMenuAlt4 className="text-white text-2xl" />
       </div>
 
-      {/* First section - Landing page content */}
+      {/* landing page */}
       <div ref={landingRef} className="relative h-screen w-full">
         <motion.div style={{ opacity: videoOpacity }}>
           <BackgroundVideo />
         </motion.div>
         
-        {/* Main text of the landing page */}
+        {/* main text of the landing page */}
         <div className="absolute inset-0 w-full h-full flex flex-col items-center justify-center">
           <BlurText
             text="SUITS ARE COOL"
@@ -60,62 +56,51 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Second section - Animated Circles */}
+      {/* animated circles */}
       <AnimatedCircles />
 
-      {/* Third section - Page 1 (bottom to up) */}
+      
       <Page 
         direction="bottom" 
         pageIndex={1} 
         totalPages={3}
         className="bg-black"
-      >
-        <div className="flex flex-col items-center justify-center h-full text-white p-8">
-          <h1 className="text-6xl font-bold mb-8 text-center">
-            Craftsmanship
-          </h1>
-          <p className="text-xl text-center max-w-4xl leading-relaxed opacity-90">
-            Every suit is meticulously crafted with attention to detail, 
-            ensuring the perfect fit and timeless elegance that speaks to your personality.
-          </p>
-        </div>
-      </Page>
+        image="https://cdn.suitsupply.com/image/upload/f_auto,h_2363,q_auto,w_2300/suitsupply/homepage/ss25/week22/02-2_desktop_half_2560x2630.jpg"
+        imageAlt="Elegant gentleman in a perfectly tailored suit"
+        heading="Suits"
+        tagline="You can’t put a price on a good suit."
+        buttonText="I wanna suit up !"
+        imagePosition="left"
+        onButtonClick={() => console.log('Explore Collection clicked')}
+      />
 
-      {/* Fourth section - Page 2 (left to right) */}
       <Page 
         direction="left" 
         pageIndex={2} 
         totalPages={3}
         className="bg-black"
-      >
-        <div className="flex flex-col items-center justify-center h-full text-white p-8">
-          <h1 className="text-6xl font-bold mb-8 text-center">
-            Premium Materials
-          </h1>
-          <p className="text-xl text-center max-w-4xl leading-relaxed opacity-90">
-            We source only the finest fabrics from around the world, 
-            combining traditional techniques with modern innovation for exceptional quality.
-          </p>
-        </div>
-      </Page>
+        image="https://cdn.suitsupply.com/image/upload/f_auto,h_1541,q_auto,w_3000/suitsupply/homepage/ss25/week22/03_desktop_5120x2630.jpg"
+        imageAlt="Premium fabric textures and materials"
+        heading="Polos"
+        tagline="Where collar meets character. Tailored for those who lead quietly."
+        buttonText="Get smarter !"
+        imagePosition="right"
+        onButtonClick={() => console.log('View Fabrics clicked')}
+      />
 
-      {/* Fifth section - Page 3 (right to left) */}
       <Page 
         direction="right" 
         pageIndex={3} 
         totalPages={3}
         className="bg-black"
-      >
-        <div className="flex flex-col items-center justify-center h-full text-white p-8">
-          <h1 className="text-6xl font-bold mb-8 text-center">
-            Personal Style
-          </h1>
-          <p className="text-xl text-center max-w-4xl leading-relaxed opacity-90">
-            Express your unique style with our bespoke tailoring service. 
-            From classic elegance to modern sophistication, we bring your vision to life.
-          </p>
-        </div>
-      </Page>
+        image="https://cdn.suitsupply.com/image/upload/f_auto,h_1229,q_auto,w_768/suitsupply/homepage/ss25/week22/04_mobile_1300x2080-2.jpg"
+        imageAlt="Bespoke tailoring and personal styling"
+        heading="Linen Shirts"
+        tagline="Lightweight. Heavy on style. City heat, countryside ease."
+        buttonText="Get elegant !"
+        imagePosition="left"
+        onButtonClick={() => console.log('Book Consultation clicked')}
+      />
       
     </div>
   );
