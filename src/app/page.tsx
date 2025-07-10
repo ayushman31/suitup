@@ -8,6 +8,7 @@ import AnimatedCircles from "@/components/AnimatedCircles";
 import Page from "@/components/Page";
 import { useRef } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
+import MenuIcon from "@/components/MenuIcon";
 
 const italianno = Italianno({
   weight: ['400'],
@@ -28,9 +29,7 @@ export default function Home() {
       return (
       <div ref={containerRef} className="relative">
         {/* menu icon */}
-      <div className="fixed top-0 left-0 z-50 flex items-center justify-between p-10">
-        <HiOutlineMenuAlt4 className="text-white text-2xl" />
-      </div>
+      <MenuIcon />
 
       {/* landing page */}
       <div ref={landingRef} className="relative h-screen w-full">
