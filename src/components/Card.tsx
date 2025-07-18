@@ -11,17 +11,23 @@ interface CardProps {
   className?: string;
   style?: CSSProperties;
   aspectRatio?: string;
+  name?: string;
+  description?: string;
+  price?: string;
 }
 
 const Card: React.FC<CardProps> = ({
   firstContent,
   secondContent,
-  gridSize = 7,
+  gridSize = 50,
   pixelColor = "currentColor",
-  animationStepDuration = 0.3,
+  animationStepDuration = 0.2,
   className = "",
   style = {},
   aspectRatio = "100%",
+  name,
+  description,
+  price,
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const pixelGridRef = useRef<HTMLDivElement | null>(null);
@@ -123,35 +129,54 @@ const Card: React.FC<CardProps> = ({
         ${className}
         bg-[#222]
         text-white
-        rounded-[15px]
         border-2
         border-white
-        w-[300px]
+        w-full
         max-w-full
         relative
         overflow-hidden
+        flex
+        flex-col
       `}
       style={style}
       onMouseEnter={!isTouchDevice ? handleMouseEnter : undefined}
       onMouseLeave={!isTouchDevice ? handleMouseLeave : undefined}
       onClick={isTouchDevice ? handleClick : undefined}
     >
-      <div style={{ paddingTop: aspectRatio }} />
+      {/* Image/Content Section */}
+      <div className="relative overflow-hidden aspect-[3/4]">
+        <div style={{ paddingTop: aspectRatio }} />
 
-      <div className="absolute inset-0 w-full h-full">{firstContent}</div>
+        <div className="absolute inset-0 w-full h-full">{firstContent}</div>
 
-      <div
-        ref={activeRef}
-        className="absolute inset-0 w-full h-full z-[2]"
-        style={{ display: "none" }}
-      >
-        {secondContent}
+        <div
+          ref={activeRef}
+          className="absolute inset-0 w-full h-full z-[2]"
+          style={{ display: "none" }}
+        >
+          {secondContent}
+        </div>
+
+        <div
+          ref={pixelGridRef}
+          className="absolute inset-0 w-full h-full pointer-events-none z-[3]"
+        />
       </div>
 
-      <div
-        ref={pixelGridRef}
-        className="absolute inset-0 w-full h-full pointer-events-none z-[3]"
-      />
+      {/* Text Section */}
+      {(name || description || price) && (
+        <div className="p-4 bg-white text-black border-t-2 border-white">
+          {name && (
+            <h3 className="font-semibold text-lg mb-2 truncate">{name}</h3>
+          )}
+          {description && (
+            <p className="text-sm text-gray-600 mb-2 line-clamp-2">{description}</p>
+          )}
+          {price && (
+            <p className="font-bold text-lg text-black">{price}</p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
