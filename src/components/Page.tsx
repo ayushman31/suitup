@@ -7,7 +7,6 @@ import {
   AnimatePresence,
 } from "motion/react";
 import { Italiana } from "next/font/google";
-import { Italianno } from "next/font/google";
 import { useRouter } from "next/navigation";
 
 const italiana = Italiana({
@@ -15,10 +14,6 @@ const italiana = Italiana({
   subsets: ["latin"],
 });
 
-const italianno = Italianno({
-  weight: ["400"],
-  subsets: ["latin"],
-});
 
 interface PageProps {
   children?: React.ReactNode;
@@ -121,7 +116,7 @@ export default function Page({
           alt={imageAlt}
           className="w-3/4 h-3/4 object-cover"
         />
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-white/20" />
       </motion.div>
     );
 
@@ -133,7 +128,7 @@ export default function Page({
         transition={{ duration: 0.8, delay: 0.2 }}
       >
         <motion.h1
-          className={`${italiana.className} text-white text-5xl lg:text-7xl font-bold mb-6 leading-tight`}
+          className={`${italiana.className} text-black text-5xl lg:text-7xl font-bold mb-6 leading-tight`}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.4 }}
@@ -143,7 +138,7 @@ export default function Page({
 
         {tagline && (
           <motion.p
-            className="text-white/90 text-lg lg:text-xl leading-relaxed mb-8 max-w-lg"
+            className="text-black/90 text-lg lg:text-xl leading-relaxed mb-8 max-w-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.6 }}
@@ -158,7 +153,7 @@ export default function Page({
               {!clicked && (
                 <motion.button
                   onClick={handleClick}
-                  className={`self-start px-8 py-4 bg-transparent border-2 border-white text-white font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-wider relative z-20`}
+                  className={`self-start px-8 py-4 bg-transparent border-2 border-black text-black font-semibold text-lg hover:bg-black hover:text-white transition-all duration-300 uppercase tracking-wider relative z-20`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: 20 }}
@@ -173,7 +168,7 @@ export default function Page({
 
             {clicked && (
               <motion.div
-                className="fixed top-0 left-0 bg-black z-50"
+                className="fixed top-0 left-0 bg-white z-50"
                 initial={{
                   width: "8rem",
                   height: "4rem",
@@ -203,11 +198,11 @@ export default function Page({
         {imagePosition === "left" ? (
           <>
             <div className="w-1/2 h-full">{imageSection}</div>
-            <div className="w-1/2 h-full bg-black">{contentSection}</div>
+            <div className="w-1/2 h-full bg-white">{contentSection}</div>
           </>
         ) : (
           <>
-            <div className="w-1/2 h-full bg-black">{contentSection}</div>
+            <div className="w-1/2 h-full bg-white">{contentSection}</div>
             <div className="w-1/2 h-full">{imageSection}</div>
           </>
         )}
