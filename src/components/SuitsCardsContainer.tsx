@@ -1,32 +1,8 @@
-import Card from "@/components/Card";
-import MenuIcon from "@/components/MenuIcon";
-import Search from "@/components/Search";
-import SuitsCardsContainer from "@/components/SuitsCardsContainer";
-import { Italianno } from "next/font/google";
+import Card from "./Card";
 
-
-const italianno = Italianno({
-  weight: ['400'],
-  subsets: ['latin'],
-});
-
-
-const Suits = () => {
-  return (
-    <div className="min-h-screen bg-white fixed inset-0 overflow-auto">
-      {/* Updated: Better spacing to prevent overlap */}
-      <div className="pt-8 px-6 lg:px-10">
-        <div className="flex items-center w-full justify-between">
-          <MenuIcon className="text-black flex-shrink-0" />
-          <h1 className={`${italianno.className} text-black text-2xl lg:text-3xl font-bold flex-grow text-center`}>Suits</h1>
-          <div className="flex-shrink-0">
-            <Search className="relative" />
-          </div>
-        </div>
-      </div>
-
-      {/* Card container - moved down with adjusted spacing */}
-      {/* <div className="px-6 lg:px-10 mt-8">
+const SuitsCardsContainer = () => {
+    return (
+        <div className="px-6 lg:px-10 mt-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 max-w-4xl mx-auto">
           <Card 
             firstContent={<img src="https://cdn.suitsupply.com/image/upload/b_rgb:efefef,bo_300px_solid_rgb:efefef,c_pad,w_2600/b_rgb:efefef,c_pad,dpr_1,w_768,h_922,f_auto,q_auto,fl_progressive/products/suits/default/P7043_29.jpg" alt="Classic Black Suit" className="w-full h-full object-cover" />} 
@@ -101,10 +77,8 @@ const Suits = () => {
           
           
         </div>
-      </div> */}
-      <SuitsCardsContainer />
-    </div>
-  );
-};
+      </div>
+    )
+}
 
-export default Suits;
+export default SuitsCardsContainer;
