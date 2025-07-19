@@ -1,6 +1,19 @@
 "use client"
 import React, { useRef, useEffect, useState, CSSProperties } from "react";
 import { gsap } from "gsap";
+import { Italiana } from "next/font/google";
+import { Italianno } from "next/font/google";
+
+const italiana = Italiana({
+  weight: ['400'],
+  subsets: ['latin'],
+})
+
+const italianno = Italianno({
+  weight: ['400'],
+  subsets: ['latin'],
+})
+
 
 interface CardProps {
   firstContent: React.ReactNode;
@@ -169,13 +182,13 @@ const Card: React.FC<CardProps> = ({
       {(name || description || price) && (
         <div className="p-4 bg-white text-black border-t-2 border-white">
           {name && (
-            <h3 className="font-semibold text-lg mb-2 truncate">{name}</h3>
+            <h3 className={`${italiana.className} font-bold text-xl mb-2 truncate`}>{name}</h3>
           )}
           {description && (
-            <p className="text-sm text-gray-600 mb-2 line-clamp-2">{description}</p>
+            <p className={`${italiana.className} text-md text-gray-600 mb-2 line-clamp-2`}>{description}</p>
           )}
           {price && (
-            <p className="font-bold text-lg text-black">{price}</p>
+            <p className={`${italianno.className} font-bold text-4xl text-black`}>{price}</p>
           )}
         </div>
       )}
