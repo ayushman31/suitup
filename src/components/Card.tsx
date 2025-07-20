@@ -188,7 +188,7 @@ const Card: React.FC<CardProps> = ({
             <p className={`${italiana.className} text-md text-gray-600 mb-2 line-clamp-2`}>{description}</p>
           )}
           {price && (
-            <p className={`${italianno.className} font-bold text-4xl text-black`}>{price}</p>
+            <p className={`${italiana.className} font-bold text-3xl text-black`}>{price}</p>
           )}
         </div>
       )}

@@ -25,27 +25,25 @@ const Suits = () => {
       />
             
       
-      <div className="relative z-10 w-screen">
-        <div className="pt-8 px-6 lg:px-10">
-          <div className="grid grid-cols-3 items-center w-full bg-red-500">
-            
-            <div className="flex justify-start">
-              <MenuIcon className="text-black" />
-            </div>
-            
-           
-            <div className="flex justify-center">
-              <h1 className={`${italianno.className} text-black text-4xl lg:text-5xl font-bold`}>
-                Suits
-              </h1>
-            </div>
-            
-           
-            <div className="flex justify-end">
-              <Search className="relative" />
-            </div>
+              {/* Fixed MenuIcon - positioned separately */}
+        <MenuIcon className="text-black" />
+        
+        <div className="relative z-10 w-screen">
+          <div className="pt-8 px-6 lg:px-10">
+           <div className="flex items-center justify-between w-full">
+             {/* Left side - Suits title with left margin to avoid overlap */}
+             <div className="ml-16 sm:ml-20">
+               <h1 className={`${italianno.className} text-black text-4xl sm:text-4xl lg:text-5xl font-bold`}>
+                 Suits
+               </h1>
+             </div>
+             
+             {/* Right side - Search component */}
+             <div className="flex-shrink-0">
+               <Search className="relative" />
+             </div>
+           </div>
           </div>
-        </div>
 
         <SuitsCardsContainer />
       </div>
