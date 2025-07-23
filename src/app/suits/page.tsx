@@ -1,5 +1,4 @@
 import FlowingBackground from "@/components/FlowingBackground";
-import MenuIcon from "@/components/MenuIcon";
 import Search from "@/components/Search";
 import SuitsCardsContainer from "@/components/SuitsCardsContainer";
 import { Italianno } from "next/font/google";
@@ -22,11 +21,7 @@ const Suits = () => {
       <FlowingBackground
         texts={["Tailored & Timeless", "Elegance & Edge", "Presence & Precision", "Sharpness & Soul"]}
         opacity={0.1}
-      />
-            
-      
-              {/* Fixed MenuIcon - positioned separately */}
-        <MenuIcon className="text-black" />
+      />  
         
         <div className="relative z-10 w-screen">
           <div className="pt-8 px-6 lg:px-10">

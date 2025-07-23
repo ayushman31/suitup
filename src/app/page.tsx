@@ -3,12 +3,10 @@ import BackgroundVideo from "@/components/BackgroundVideo";
 import BlurText from "@/components/BlurText";
 import { TextEffect } from "@/components/text-effect";
 import { Italianno } from 'next/font/google';
-import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import AnimatedCircles from "@/components/AnimatedCircles";
 import Page from "@/components/Page";
 import { useRef } from "react";
 import { useScroll, useTransform, motion } from "motion/react";
-import MenuIcon from "@/components/MenuIcon";
 
 const italianno = Italianno({
   weight: ['400'],
@@ -28,9 +26,6 @@ export default function Home() {
 
       return (
       <div ref={containerRef} className="relative">
-        {/* menu icon */}
-      <MenuIcon />
-
       {/* landing page */}
       <div ref={landingRef} className="relative h-screen w-full">
         <motion.div style={{ opacity: videoOpacity }}>
