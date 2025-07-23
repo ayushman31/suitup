@@ -39,7 +39,7 @@ export default function MenuContainer({ iconClassName }: MenuContainerProps) {
               animate={{ scale: 1, y: 0 }}
               exit={{ scale: 0.9, y: 20 }}
               transition={{ duration: 0.2 }}
-              className="bg-white dark:bg-gray-900 rounded-lg p-6 max-w-6xl w-full max-h-[90vh] overflow-auto shadow-2xl"
+              className="bg-gray-100 rounded-lg p-6 max-w-6xl w-full max-h-[90vh] overflow-auto shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
               <Menu />
